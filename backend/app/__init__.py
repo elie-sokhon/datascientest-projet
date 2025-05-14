@@ -26,6 +26,9 @@ def create_app():
     migrate.init_app(app, db)
     socketio.init_app(app)
 
+    with app.app_context():
+        from app.models import User, Message 
+        
     # Import and register blueprints here later
     # from app.routes.auth import auth_bp
     # app.register_blueprint(auth_bp)
