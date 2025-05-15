@@ -19,7 +19,7 @@ def create_app():
     app = Flask(__name__)
 
     # Basic config
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "supersecretkey")
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///lobby.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
