@@ -1,7 +1,7 @@
 import sqlite3
 
 # Connexion à la base
-conn = sqlite3.connect('instance/lobby.db')
+conn = sqlite3.connect("instance/lobby.db")
 cursor = conn.cursor()
 
 # Lister toutes les tables

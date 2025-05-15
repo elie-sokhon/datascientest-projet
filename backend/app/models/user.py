@@ -1,8 +1,10 @@
 from datetime import datetime
+
 from app import db
 
+
 class User(db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     pseudonym = db.Column(db.String(80), unique=True, nullable=False)
@@ -17,5 +19,5 @@ class User(db.Model):
             "id": self.id,
             "pseudonym": self.pseudonym,
             "connected_at": self.connected_at.isoformat(),
-            "is_connected": self.is_connected
+            "is_connected": self.is_connected,
         }

@@ -1,7 +1,9 @@
 from datetime import datetime
+
 from app import db
 from app.models.user import User
 from app.utils.validators import is_valid_pseudonym
+
 
 class UserService:
     @staticmethod

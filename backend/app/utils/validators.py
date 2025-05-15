@@ -2,6 +2,7 @@ import re
 
 FORBIDDEN_WORDS = {"admin", "moderator", "system"}
 
+
 def is_valid_pseudonym(pseudonym: str) -> bool:
     """
     Validate pseudonym:

@@ -1,9 +1,10 @@
-from flask_socketio import emit
-from app import socketio, db
-from app.models.user import User
+from app import db, socketio
 from app.models.message import Message
+from app.models.user import User
+from flask_socketio import emit
 
-@socketio.on('send_message')
+
+@socketio.on("send_message")
 def handle_send_message(data):
     """
     Data format expected:
@@ -12,16 +13,16 @@ def handle_send_message(data):
         'content': 'your message here'
     }
     """
-    sender_name = data.get('sender')
-    content = data.get('content')
+    sender_name = data.get("sender")
+    content = data.get("content")
 
     if not sender_name or not content:
-        emit('error', {'error': 'sender and content required'})
+        emit("error", {"error": "sender and content required"})
         return
 
     user = User.query.filter_by(pseudonym=sender_name, is_connected=True).first()
     if not user:
-        emit('error', {'error': 'sender not connected'})
+        emit("error", {"error": "sender not connected"})
         return
 
     # Save message to database
@@ -30,8 +31,12 @@ def handle_send_message(data):
     db.session.commit()
 
     # Broadcast message to all connected clients
-    emit('receive_message', {
-        'sender': sender_name,
-        'content': content,
-        'timestamp': message.timestamp.isoformat()
-    }, broadcast=True)
+    emit(
+        "receive_message",
+        {
+            "sender": sender_name,
+            "content": content,
+            "timestamp": message.timestamp.isoformat(),
+        },
+        broadcast=True,
+    )

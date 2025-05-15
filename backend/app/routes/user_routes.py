@@ -1,12 +1,13 @@
-from flask import Blueprint, request, jsonify
 from app.services.user_service import UserService
+from flask import Blueprint, jsonify, request
 
-user_bp = Blueprint('user_bp', __name__)
+user_bp = Blueprint("user_bp", __name__)
 
-@user_bp.route('/login', methods=['POST'])
+
+@user_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    pseudonym = data.get('pseudonym')
+    pseudonym = data.get("pseudonym")
 
     if not pseudonym:
         return jsonify({"error": "Pseudonym is required."}), 400
@@ -17,10 +18,11 @@ def login():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
-@user_bp.route('/logout', methods=['POST'])
+
+@user_bp.route("/logout", methods=["POST"])
 def logout():
     data = request.get_json()
-    pseudonym = data.get('pseudonym')
+    pseudonym = data.get("pseudonym")
 
     if not pseudonym:
         return jsonify({"error": "Pseudonym is required."}), 400
@@ -31,8 +33,11 @@ def logout():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
-@user_bp.route('/users', methods=['GET'])
+
+@user_bp.route("/users", methods=["GET"])
 def list_users():
-    sort_by = request.args.get('sort_by')  # Optional: ?sort_by=pseudonym OR ?sort_by=connected_at
+    sort_by = request.args.get(
+        "sort_by"
+    )  # Optional: ?sort_by=pseudonym OR ?sort_by=connected_at
     users = UserService.list_connected_users(sort_by=sort_by)
     return jsonify(users), 200

@@ -1,0 +1,16 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 24.3.0     # latest stable black release
+    hooks:
+      - id: black
+        exclude: venv/|.venv/|env/|.env/
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1     # latest isort version
+    hooks:
+      - id: isort
+        exclude: venv/|.venv/|env/|.env/
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0       # latest flake8 version
+    hooks:
+      - id: flake8
+        exclude: venv/|.venv/|env/|.env/
