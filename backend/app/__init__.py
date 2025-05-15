@@ -29,16 +29,13 @@ def create_app():
     socketio.init_app(app)
 
     with app.app_context():
-        from app.models import User, Message
+        from app.models import Message, User
 
+    # Register blueprints
     from app.routes.user_routes import user_bp
 
     app.register_blueprint(user_bp)
 
     from app.routes import socketio_events  # Import to register events
-
-    # Import and register blueprints here later
-    # from app.routes.auth import auth_bp
-    # app.register_blueprint(auth_bp)
 
     return app
