@@ -29,6 +29,9 @@ def create_app():
     with app.app_context():
         from app.models import User, Message 
         
+    from app.routes.user_routes import user_bp
+    app.register_blueprint(user_bp)
+
     # Import and register blueprints here later
     # from app.routes.auth import auth_bp
     # app.register_blueprint(auth_bp)
